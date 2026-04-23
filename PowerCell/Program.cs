@@ -40,4 +40,59 @@ namespace PowerCell
             // [Apollo] Level 6: 200/200
         }
     }
+
+    public class Cell
+    {
+        private float charge;
+
+        public string Name { get; }
+
+        public float Charge
+        {
+            get
+            {
+                return charge;
+            }
+
+            set
+            {
+                if (value < 0)
+                {
+                    charge = 0;
+                }
+                else if (value > 200)
+                {
+                    charge = 200;
+                }
+                else
+                {
+                    charge = value;
+                }
+            }
+        }
+
+        public int Level
+        {
+            get
+            {
+                return 1 + (int)Charge / 40;
+            }
+        }
+
+        public void Consume(float amount)
+        {
+            Charge -= amount;
+        }
+
+        public void Restore()
+        {
+            Charge = 200;
+        }
+
+        public Cell (string name)
+        {
+            Name = name;
+            Charge = 200;
+        }
+    }
 }
